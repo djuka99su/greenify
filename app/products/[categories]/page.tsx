@@ -16,7 +16,7 @@ const CategoryPage = ({ params }: CategoryPageProps) => {
     <>
       <div className="w-full m-auto py-4 flex justify-center xl:justify-normal gap-x-4 xl:gap-x-10 gap-y-4 flex-wrap">
         {productsFiltered.map((product, index) => (
-          <ProductCard id={product.id} productTitle={product.title} productDescr={product.descr} productLink={`/products/${product.category.toLowerCase().replace(" ","-")}/${product.title.toLowerCase().replace(" ", "-").replace(" ","-")}`} image={product.image}/>
+          <ProductCard key={product.id} id={product.id} productTitle={product.title} productDescr={product.descr} productLink={`/products/${product.category.toLowerCase().replace(" ","-")}/${product.title.toLowerCase().replace(" ", "-").replace(" ","-")}`} image={product.image}/>
         ))}
       </div>
     </>

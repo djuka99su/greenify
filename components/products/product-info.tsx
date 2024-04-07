@@ -6,10 +6,11 @@ import { useShoppingCart } from "@/context/shopping-cart-context";
 import { Button } from "@/components/ui/button";
 
 export const ProductInfo = ({ id }: { id: string }) => {
+  
+  const {getitemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart}= useShoppingCart()
   const product = products.find((prod) => prod.id === id);
   if (!product) return null;
 
-  const {getitemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart}= useShoppingCart()
   const quantity = getitemQuantity(id)
 
   return (
