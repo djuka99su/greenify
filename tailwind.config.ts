@@ -18,6 +18,9 @@ const config = {
       },
     },
     extend: {
+      width:{
+        "128": "30rem"
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -76,6 +79,7 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "caret-blink": "caret-blink 1.25s ease-out infinite",
+        "spin-slow": "spin 25s linear infinite",
       },
     },
   },

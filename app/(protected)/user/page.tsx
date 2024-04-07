@@ -7,7 +7,7 @@ const UserPage = async () => {
   
 
   return (
-    <div className="bg-secondary flex flex-col p-4 rounded-xl w-[400px] sm:w-[600px] shadow-sm text-center">
+    <div className="bg-white flex flex-col p-4 rounded-xl w-[400px] sm:w-[600px] shadow-sm text-center">
       <h2 className="text-2xl mb-5">User Info</h2>
       <div className="">
         <div className="flex justify-between">
@@ -28,7 +28,7 @@ const UserPage = async () => {
         </div>
         <div className="flex justify-between">
           <span>2FA Enabled:</span>
-          <span className={session?.user.isTwoFactorEnabled ? "px-2 bg-emerald-600 text-white rounded" : "px-2 bg-red-600 text-white rounded"}>{session?.user.isTwoFactorEnabled ? "true" : "false"}</span>
+          <span className={session?.user.isTwoFactorEnabled ? "px-2 bg-emerald-600 text-white rounded" : "px-2 bg-red-600 text-white rounded"}>{session?.user.isTwoFactorEnabled ? "ON" : "OFF"}</span>
         </div>
       </div>
     </div>

@@ -32,6 +32,7 @@ import { FormSuccess } from "../form-success";
 import { login } from "@/actions/login";
 import { useSearchParams } from "next/navigation";
 
+
 export const LoginForm = () => {
   const [isPending, startTransition] = useTransition();
   const [showTwoFactor, setShowTwoFactor] = useState(false);
@@ -75,7 +76,7 @@ export const LoginForm = () => {
 
   return (
     <CardWrapper
-      headerLabel="Welcome back"
+      headerLabel="Login"
       backButtonLabel="Dont have an account?"
       backButtonHref="/auth/register"
       // showSocial
@@ -161,7 +162,7 @@ export const LoginForm = () => {
           </div>
           <FormError message={error} />
           <FormSuccess message={success} />
-          <Button type="submit" className="w-full" disabled={isPending}>
+          <Button type="submit" className="w-full" variant={"custom"} disabled={isPending}>
             {showTwoFactor ? "Confirm 2FA" : "Login"}
           </Button>
         </form>

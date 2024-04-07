@@ -15,11 +15,15 @@ export default auth((req) => {
   const isLoggedIn = !!req.auth;
 
   const isApiAuthRoute = nextUrl.pathname.startsWith(apiAuthPrefix);
-  const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
+  const isPublicRoute =
+    publicRoutes.includes(nextUrl.pathname) ||
+    nextUrl.pathname.startsWith("/product");
   const isAuthRoute = authRoutes.includes(nextUrl.pathname);
+  
   if (req.auth?.user.email) {
     const isAdmin = adminRoles.includes(req.auth?.user.email);
-    if(!isAdmin && nextUrl.pathname === "/admin") return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl))
+    if (!isAdmin && nextUrl.pathname === "/admin")
+      return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
   }
 
   if (isApiAuthRoute) {

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogTrigger} from "@/components/ui/dialog"
 import { LoginForm } from "@/components/auth/login-form";
+import { useState } from "react";
 
 interface LoginButtonProps {
     children : React.ReactNode;
@@ -16,12 +17,12 @@ export const LoginButton = ({
     asChild
 } : LoginButtonProps) =>{
 
+    const [state, setState] = useState<boolean>(false)
     const router = useRouter()
 
     const onClick = () =>{
         router.push("/auth/login")
     }
-
 
     if ( mode === "modal"){
         return (
