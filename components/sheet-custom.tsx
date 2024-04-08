@@ -58,7 +58,6 @@ export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
           <Button variant={"custom"} className="w-full text-white" asChild>
             <Link
               href={"https://buy.stripe.com/test_fZedUy8YeecL3165kl"}
-              target="_blank"
             >
               Checkout
             </Link>
