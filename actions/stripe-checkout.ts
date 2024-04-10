@@ -8,9 +8,6 @@ const cancelUrl = absoluteUrl("/products");
 
 export const createStripeUrl = async (items: any) => {
 
-
-  
-
   const stripeSession = await stripe.checkout.sessions.create({
     mode: "payment",
     payment_method_types: ["card"],
