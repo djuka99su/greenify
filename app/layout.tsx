@@ -29,9 +29,6 @@ export default async function RootLayout({
       <SessionProvider session={session}>
         <html lang="en">
           <body className={cn("bg-slate-100", inter.className)}>
-            <div className="w-full flex justify-center items-center bg-emerald-300 text-slate-800 font-bold p-1">
-              <p>UNDER DEVELOPMENT 😎</p>
-            </div>
             <Navbar />
             {children}
             <Footer/>

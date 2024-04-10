@@ -12,7 +12,7 @@ interface ShoppingCartContext {
   cartItems: CartItem[]
 }
 
-interface CartItem  {
+export interface CartItem  {
   id: string
   quantity: number
 }

@@ -1,6 +1,5 @@
 "use client";
 
-
 import { usePathname } from "next/navigation";
 import {
   Sheet,
@@ -12,18 +11,38 @@ import {
   SheetFooter,
 } from "@/components/ui/sheet";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ProductSheet } from "./products/product-sheet";
 import { products } from "@/data/products";
 import { useShoppingCart } from "@/context/shopping-cart-context";
+import { stripeData } from "@/lib/utils";
 
 import { links, linksCategory } from "@/routes";
+import { createStripeUrl } from "@/actions/stripe-checkout";
+import { useRouter } from "next/navigation";
+
+import {BeatLoader} from "react-spinners"
 
 export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
   const { cartItems } = useShoppingCart();
-  console.log(cartItems);
+  const [isPending, startTransition] = useTransition();
+  const router = useRouter();
+
+  const checkoutItems = stripeData(products, cartItems);
+
+  const checkOut = () => {
+    startTransition(() => {
+      createStripeUrl(checkoutItems)
+        .then((response) => {
+          if (response.data) {
+            window.location.href = response.data;
+          }
+        })
+        .catch(() => console.log("Something went wrong!"));
+    });
+  };
 
   return (
     <Sheet>
@@ -55,12 +74,13 @@ export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
             €
           </p>
           <hr className="my-2" />
-          <Button variant={"custom"} className="w-full text-white" asChild>
-            <Link
-              href={"https://buy.stripe.com/test_fZedUy8YeecL3165kl"}
-            >
-              Checkout
-            </Link>
+          <Button
+            onClick={checkOut}
+            variant={"custom"}
+            className="w-full text-white"
+            disabled={isPending}
+          >
+            {isPending ? <BeatLoader className="text-white"/> : "Checkout"}
           </Button>
         </div>
       </SheetContent>
