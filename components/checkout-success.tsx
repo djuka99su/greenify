@@ -21,9 +21,10 @@ export const CheckOutSuccess = ({ order, products }: CheckOutSuccessProps) => {
         <div className="space-y-6 xl:space-y-2">
           <h2 className="text-4xl font-bold">Thanks for purchase!</h2>
           <p className="text-slate-600 m-auto xl:m-0 w-full xl:w-3/5">
-            Thank you for your order! Your purchase was successful. We're
+            
+            Thank you for your order! Your purchase was successful. We are
             preparing your items for shipment. Expect a confirmation email with
-            tracking details shortly.{" "}
+            tracking details shortly.
           </p>
         </div>
         <div>
