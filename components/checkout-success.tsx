@@ -16,6 +16,7 @@ export const CheckOutSuccess = ({ order, products }: CheckOutSuccessProps) => {
 
   useEffect(() => {
     removeAllItems()
+    localStorage.removeItem("STRIPE_CART_ITEMS")
     toast.success("Payment successful!");
   }, []);
 
