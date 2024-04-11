@@ -4,6 +4,7 @@ import React, { useEffect } from "react";
 import { Toaster, toast } from "sonner";
 import Stripe from "stripe";
 import { ProductCheckOutSuccess } from "./products/product-checkout-success";
+import { useShoppingCart } from "@/context/shopping-cart-context";
 
 interface CheckOutSuccessProps {
   order: Stripe.PaymentIntent | string | null | any;
@@ -11,7 +12,10 @@ interface CheckOutSuccessProps {
 }
 
 export const CheckOutSuccess = ({ order, products }: CheckOutSuccessProps) => {
+  const {  removeAllItems } = useShoppingCart();
+
   useEffect(() => {
+    removeAllItems()
     toast.success("Payment successful!");
   }, []);
 

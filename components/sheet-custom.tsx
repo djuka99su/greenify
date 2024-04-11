@@ -28,7 +28,7 @@ import { toast, Toaster } from "sonner";
 
 export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState<boolean>(false);
-  const { cartItems, removeAllItems } = useShoppingCart();
+  const { cartItems } = useShoppingCart();
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -39,7 +39,6 @@ export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
       createStripeUrl(checkoutItems)
         .then((response) => {
           if (response.data) {
-            removeAllItems()
             window.location.href = response.data;
           }
           if(response.error){
