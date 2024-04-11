@@ -9,7 +9,7 @@ export const ProductCheckOutSuccess = ({
   productData,
 }: ProductCheckOutSuccessProps) => {
   return (
-    <div className="flex items-center xl:items-stretch gap-2 xl:gap-10 p-0 xl:p-4">
+    <div className="flex items-center xl:items-stretch gap-2 xl:gap-10 p-0 xl:p-4 my-2">
       <img
         src={productData.price.product.images[0]}
         alt="Loading..."

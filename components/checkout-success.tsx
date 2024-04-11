@@ -34,17 +34,18 @@ export const CheckOutSuccess = ({ order, products }: CheckOutSuccessProps) => {
             Order Number: <span className="text-emerald-500">{order?.id}</span>
           </p>
         </div>
-        <hr className="w-3/5" />
-        <div className="space-y-4">
+        <hr className="w-3/5 m-auto xl:m-0" />
+        <div>
           {products?.map((product, i) => (
             <div key={i}>
               <ProductCheckOutSuccess productData={product} />
-              <hr className="w-3/5" />
+              <hr className="w-3/5 m-auto xl:m-0" />
             </div>
           ))}
         </div>
-        <div className="w-full xl:w-3/5 p-4">
-          <p className="text-right font-bold">Total: {order.amount/100}€</p>
+        <div className="w-full xl:w-3/5 p-4 flex justify-between">
+          <p className="text-slate-500 tracking-wider ">Total amount including VAT</p>
+          <p className="font-bold">Total: {order.amount/100}€</p>
         </div>
         <h2></h2>
       </div>
