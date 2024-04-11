@@ -10,7 +10,6 @@ interface ConfirmationPageProps {
 
 const ConfirmationPage = async ({ params }: ConfirmationPageProps) => {
   const session = await checkOutSession(params.session);
-
   if (!session) {
     return (
       <>

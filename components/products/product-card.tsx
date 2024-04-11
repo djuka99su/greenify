@@ -35,14 +35,14 @@ export const ProductCard = ({
   const quantity = getitemQuantity(id)
 
   return (
-    <Card className="w-[160px] sm:w-[250px] h-[450px] cursor-pointer">
+    <Card className="w-[190px] sm:w-[250px] min-h-[350px] sm:min-h-[450px] cursor-pointer">
       <Link href={productLink}>
         <CardHeader className="items-center">
           <Image src={image} alt="Loading..." height={200} />
           <CardTitle className="text-lg text-emerald-600">
             {productTitle}
           </CardTitle>
-          <CardDescription>{productDescr}</CardDescription>
+          <CardDescription className="h-20 xl:h-28 overflow-auto">{productDescr}</CardDescription>
         </CardHeader>
       </Link>
       <CardFooter className="justify-center">
