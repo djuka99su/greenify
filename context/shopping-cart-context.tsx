@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect, useRef } from "react";
 
 
 interface ShoppingCartContext {
@@ -8,6 +8,7 @@ interface ShoppingCartContext {
   increaseCartQuantity: (id: string) => void
   decreaseCartQuantity: (id: string) => void
   removeFromCart: (id: string) => void
+  removeAllItems: () => void
   cartQuantity: number,
   cartItems: CartItem[]
 }
@@ -23,8 +24,27 @@ export function useShoppingCart(){
   return useContext(ShoppingCartContext)
 }
 
+const loadJSON = (key: string): any => {
+  const item = localStorage.getItem(key);
+  return item ? JSON.parse(item) : null;
+}
+const saveJSON =  (key: any, data:any) => localStorage.setItem(key, JSON.stringify(data))
+
 export function ShoppingCartProvider( {children} : {children : React.ReactNode}){
   const [cartItems, setCartItems] = useState<CartItem[]>([])
+  const key = `STRIPE_CART_ITEMS`
+  const firstRender = useRef(true)
+
+
+  useEffect(()=>{
+    if(firstRender.current){
+      firstRender.current = false
+      const localItems = loadJSON(key)
+      localItems && setCartItems(localItems)
+      return
+    }
+    saveJSON(key, cartItems)
+  },[key, cartItems])
 
   const getitemQuantity = (id:string) => {
     return cartItems.find(item => item.id === id)?.quantity || 0
@@ -65,11 +85,15 @@ export function ShoppingCartProvider( {children} : {children : React.ReactNode})
     })
   }
 
+  const removeAllItems = () => {
+    setCartItems([])
+  }
+
   const cartQuantity = cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
 
 
   return (
-    <ShoppingCartContext.Provider value={{getitemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart, cartItems, cartQuantity}}>
+    <ShoppingCartContext.Provider value={{getitemQuantity, increaseCartQuantity, decreaseCartQuantity, removeFromCart, removeAllItems ,cartItems, cartQuantity}}>
       {children}
     </ShoppingCartContext.Provider>
   )

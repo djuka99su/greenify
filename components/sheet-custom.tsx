@@ -24,9 +24,11 @@ import { createStripeUrl } from "@/actions/stripe-checkout";
 import { useRouter } from "next/navigation";
 
 import {BeatLoader} from "react-spinners"
+import { toast, Toaster } from "sonner";
 
 export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
-  const { cartItems } = useShoppingCart();
+  const [open, setOpen] = useState<boolean>(false);
+  const { cartItems, removeAllItems } = useShoppingCart();
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
 
@@ -37,7 +39,13 @@ export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
       createStripeUrl(checkoutItems)
         .then((response) => {
           if (response.data) {
+            removeAllItems()
             window.location.href = response.data;
+          }
+          if(response.error){
+            setOpen(false)
+            router.push("/auth/login")
+            toast.info("Log in to make a purchase!")
           }
         })
         .catch(() => console.log("Something went wrong!"));
@@ -45,7 +53,8 @@ export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <Sheet>
+    <Sheet open={open} onOpenChange={setOpen}>
+      <Toaster/>
       <SheetTrigger>{children}</SheetTrigger>
       <SheetContent
         className="w-screen overflow-auto flex flex-col justify-between"
