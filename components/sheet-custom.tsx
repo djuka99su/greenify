@@ -23,7 +23,7 @@ import { links, linksCategory } from "@/routes";
 import { createStripeUrl } from "@/actions/stripe-checkout";
 import { useRouter } from "next/navigation";
 
-import {BeatLoader} from "react-spinners"
+import { BeatLoader } from "react-spinners";
 import { toast, Toaster } from "sonner";
 
 export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
@@ -41,10 +41,10 @@ export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
           if (response.data) {
             window.location.href = response.data;
           }
-          if(response.error){
-            setOpen(false)
-            router.push("/auth/login")
-            toast.info("Log in to make a purchase!")
+          if (response.error) {
+            setOpen(false);
+            router.push("/auth/login");
+            toast.info("Log in to make a purchase!");
           }
         })
         .catch(() => console.log("Something went wrong!"));
@@ -53,7 +53,7 @@ export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <Toaster/>
+      <Toaster />
       <SheetTrigger>{children}</SheetTrigger>
       <SheetContent
         className="w-screen overflow-auto flex flex-col justify-between"
@@ -88,7 +88,7 @@ export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
             className="w-full text-white"
             disabled={isPending}
           >
-            {isPending ? <BeatLoader className="text-white"/> : "Checkout"}
+            {isPending ? <BeatLoader className="text-white" /> : "Checkout"}
           </Button>
         </div>
       </SheetContent>
@@ -98,6 +98,17 @@ export const SheetBucket = ({ children }: { children: React.ReactNode }) => {
 
 export const SheetNavbar = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("");
+  const router = useRouter();
+
+  const handleEnterDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      router.push(`/search/${search}`);
+      setOpen(false)
+      setSearch("");
+    }
+  };
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger>{children}</SheetTrigger>
@@ -107,7 +118,7 @@ export const SheetNavbar = ({ children }: { children: React.ReactNode }) => {
           <SheetDescription className="py-2">
             Navigate trough pages
           </SheetDescription>
-          <Input placeholder="Search..." />
+          <Input onKeyDown={handleEnterDown} onChange={(e)=> setSearch(e.target.value)} value={search} placeholder="Search..." />
           <SheetFooter className="flex flex-col gap-2 text-left text-lg p-1">
             {links.map((link, i) => (
               <Link

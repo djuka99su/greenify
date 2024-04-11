@@ -16,17 +16,23 @@ import { SheetBucket, SheetNavbar } from "@/components/sheet-custom";
 import { Input } from "@/components/ui/input";
 import { useShoppingCart } from "@/context/shopping-cart-context";
 
+import { useRouter } from "next/navigation";
+
 
 
 const Navbar: React.FC = () => {
   const [searchState, setSearchState] = useState<boolean>(false);
+  const [search, setSearch] = useState<string>("")
   const pathName = usePathname();
   const { cartQuantity } = useShoppingCart();
   const user = useCurrentUser();
+  const router = useRouter()
 
   const handleEnterDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       setSearchState(false);
+      router.push(`/search/${search}`)
+      setSearch("")
     }
   };
 
@@ -91,7 +97,7 @@ const Navbar: React.FC = () => {
               <IoSearch className="h-6 w-6" />
             </button>
           ) : (
-            <Input onKeyDown={handleEnterDown} placeholder="Search..." />
+            <Input onKeyDown={handleEnterDown} onChange={(e)=> setSearch(e.target.value)} value={search} placeholder="Search..." />
           )}
         </div>
       </nav>

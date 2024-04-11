@@ -12,16 +12,17 @@ const linksCategory = [
   { href: "/products", name: "Other" },
 ];
 
-const SearchLayout = ({
+const ProductsLayout = ({
   children,
+  params
 }: Readonly<{
   children: React.ReactNode;
+  params: {query:string}
 }>) => {
 
 
   return (
     <div className="mt-10 min-h-full w-full xl:w-4/5 m-auto">
-      <BreadcrumbCustom />
       <div className="w-full flex justify-center mt-2 xl:hidden">
         <SheetFilter>Filter</SheetFilter>
       </div>
@@ -35,4 +36,4 @@ const SearchLayout = ({
   );
 };
 
-export default SearchLayout;
+export default ProductsLayout;
