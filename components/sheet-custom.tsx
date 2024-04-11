@@ -103,6 +103,9 @@ export const SheetNavbar = ({ children }: { children: React.ReactNode }) => {
 
   const handleEnterDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      if(search === "") {
+        return
+      }
       router.push(`/search/${search}`);
       setOpen(false)
       setSearch("");

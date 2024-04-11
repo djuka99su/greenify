@@ -30,6 +30,10 @@ const Navbar: React.FC = () => {
 
   const handleEnterDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
+      if(search === "") {
+        setSearchState(false)
+        return
+      }
       setSearchState(false);
       router.push(`/search/${search}`)
       setSearch("")
