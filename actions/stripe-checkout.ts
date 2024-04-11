@@ -5,7 +5,7 @@ import { absoluteUrl } from "@/lib/utils";
 import { auth } from "@/auth";
 import { error } from "console";
 
-const successUrl = absoluteUrl("/checkout-confirmation?sessionId={CHECKOUT_SESSION_ID}");
+const successUrl = absoluteUrl("/checkout-confirmation/{CHECKOUT_SESSION_ID}");
 const cancelUrl = absoluteUrl("/products");
 
 export const createStripeUrl = async (items: any) => {
