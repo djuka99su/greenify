@@ -18,9 +18,9 @@ const SearchPage = ({ params }: SearchPageProps) => {
       <h2 className="text-xl xl:text-2xl font-bold static xl:absolute top-40 left-40 text-center xl:text-left text-slate-500">
         Search word{" "}
         <span className="text-black">
-          {`<<`}
+          {`"`}
           {params.query}
-          {`>>`}
+          {`"`}
         </span>{" "}
         gave {filteredProducts.length}{" "}
         {filteredProducts.length > 1 ? "results" : "result"}
